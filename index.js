@@ -16,5 +16,5 @@ const readStream = fs.createReadStream('input.txt');
 // -----------buffer to string
 
 readStream.on('data', (chunk) => {
-    console.log('Received chunk:', chunk.toString());
+    console.log('Received chunk:', chunk. toLocaleString());
 });
