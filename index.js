@@ -36,12 +36,23 @@ const app = express()
 
 
 
+// ------------routing
+
+app.get('/', (req , res) =>{
+
+    res.status(200).send('Welcome to home path!');
+
+})
+
+
+app.get('/about', (req , res) =>{
+
+    res.status(200).send('Welcome to about path!'); 
+
+})
 
 
 
 
-
-
-console.log('Hello, World!');
 
 app.listen(8000, () => console.log('Server is running on port 8000'));
