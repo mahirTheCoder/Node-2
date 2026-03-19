@@ -1,10 +1,11 @@
 const fs = require('fs');
-const crypto = require('crypto');
+// const crypto = require('crypto');
 
-
+const express = require('express')
+const app = express()
 // -------------stream -----
 
-const readStream = fs.createReadStream('input.txt');
+// const readStream = fs.createReadStream('input.txt');
 
 
 // ---------buffer 
@@ -22,13 +23,25 @@ const readStream = fs.createReadStream('input.txt');
 
 
 // ------------crypto thats mean password hide 
-const hash = crypto.createHash('sha256');
+// const hash = crypto.createHash('sha256');
 
 
 // Update the hash with data
-hash.update('Hello, World!');
+// hash.update('Hello, World!');
 
 // Get the digest in hexadecimal format
-const digest = hash.digest('hex');
-console.log(digest);
+// const digest = hash.digest('hex');
+// console.log(digest);
 
+
+
+
+
+
+
+
+
+
+console.log('Hello, World!');
+
+app.listen(8000, () => console.log('Server is running on port 8000'));
