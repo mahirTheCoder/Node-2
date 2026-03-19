@@ -314,6 +314,8 @@ app.post('/login', (req , res)=>{
    
     if(!users.length) return res.status(404).send('User not found!');
 
+
+    res.status(200).send({message: 'Login successful!' , users});
     
 })
 
