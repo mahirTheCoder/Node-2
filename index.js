@@ -5,6 +5,8 @@ const express = require('express')
 const app = express()
 // -------------stream -----
 
+app.use(express.json());
+
 // const readStream = fs.createReadStream('input.txt');
 
 
@@ -49,6 +51,24 @@ app.get('/about', (req , res) =>{
 
     res.status(200).send('Welcome to about path!'); 
 
+})
+
+
+app.post('/login', (req , res)=>{
+
+    // res.status(201).send('Login successful!');
+
+    const {email , password} = req.body;
+    // if(email === '' || password === ''){
+    //     res.status(400).send('Email and password are required!');
+    // }
+
+
+
+    if(!email ) return res.status(404 ).send('Email is required!');
+    if(!password ) return res.status(404 ).send('Password is required!');
+
+    console.log(req.body);
 })
 
 
