@@ -1,19 +1,14 @@
 // const fs = require('fs');
 // const crypto = require('crypto');
 
-
 // -------------stream -----
-
 
 // const readStream = fs.createReadStream('input.txt');
 
-
-// ---------buffer 
+// ---------buffer
 // readStream.on('data', (chunk) => {
 //     console.log('Received chunk:', chunk);
 // });
-
-
 
 // -----------buffer to string
 
@@ -21,10 +16,8 @@
 //     console.log('Received chunk:', chunk. toLocaleString());
 // });
 
-
-// ------------crypto thats mean password hide 
+// ------------crypto thats mean password hide
 // const hash = crypto.createHash('sha256');
-
 
 // Update the hash with data
 // hash.update('Hello, World!');
@@ -32,9 +25,6 @@
 // Get the digest in hexadecimal format
 // const digest = hash.digest('hex');
 // console.log(digest);
-
-
-
 
 // ------------routing
 
@@ -275,20 +265,17 @@
 // const app = express()
 // app.use(express.json());
 
-
 // app.get('/', (req , res) =>{
 
 //     res.status(200).send('Welcome to home path!');
 
 // })
 
-
 // app.get('/about', (req , res) =>{
 
-//     res.status(200).send('Welcome to about path!'); 
+//     res.status(200).send('Welcome to about path!');
 
 // })
-
 
 // app.post('/login', (req , res)=>{
 
@@ -299,52 +286,58 @@
 //     //     res.status(400).send('Email and password are required!');
 //     // }
 
-
-
-
 //     if(!email ) return res.status(404 ).send('Email is required!');
 //     if(!password ) return res.status(404 ).send('Password is required!');
 
 //     console.log(req.body);
 
-
 //     const users = dummyData.filter((item)=>{
 //         return item.email === email
 //     })
-   
+
 //     if(!users.length) return res.status(404).send('User not found!');
 
-
 //     res.status(200).send({message: 'Login successful!' , users});
-    
+
 // })
 
+// -------------mongodb use
 
+const express = require("express");
+const mongoose = require("mongoose");
 
-
-// -------------mongodb use 
-
-const express = require('express')
-const mongoose = require('mongoose');
-
-const app = express()
+const app = express();
 app.use(express.json());
 
+// mongoose
+//   .connect(
+//     "mongodb+srv://new:eeGkhN9eqm3m76o3@cluster0.hppyt.mongodb.net/user? appName=Clustere",
+//   )
+//   .then(() => console.log("Connected!"));
+  
+
+
+app.get("/", (req, res) => {
+  res.status(200).send("Welcome to home path!");
+});
+
+
+
+app.post("/login", async (req, res) => {
+  const { email, password,  } = req.body;
+
+
+  try {
+    // ---------store data in mongodb
+    res.status(200).send({success: true, message: "Login successful!"});
+  } catch (error) {
+        res.status(500).send({success: false, message: "Login failed!"});
+  }
+});
 
 
 
 
 
 
-
-
-
-app.get('/', (req , res) =>{
-
-    res.status(200).send('Welcome to home path!');
- 
-})
-
-
-
-app.listen(8000, () => console.log('Server is running on port 8000'));
+app.listen(8000, () => console.log("Server is running on port 8000"));
