@@ -337,6 +337,18 @@ app.post("/login", async (req, res) => {
 
 
 
+app.post("/Registration", async (req, res) => {
+  const { fullname, email, password, phone } = req.body;
+
+
+  try {
+    // ---------store data in mongodb
+    res.status(201).send({success: true, message: "Registration successful!"});
+  } catch (error) {
+        res.status(500).send({success: false, message: "Registration failed!"});
+  }
+});
+
 
 
 
