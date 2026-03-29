@@ -305,6 +305,8 @@
 
 const express = require("express");
 const mongoose = require("mongoose");
+const hello = require("./exportway");
+const userSchema = require("./userSchema");
 
 const app = express();
 app.use(express.json());
@@ -323,19 +325,6 @@ app.get("/", (req, res) => {
 
 
 
-app.post("/login", async (req, res) => {
-  const { email, password,  } = req.body;
-
-
-  try {
-    // ---------store data in mongodb
-    res.status(200).send({success: true, message: "Login successful!"});
-  } catch (error) {
-        res.status(500).send({success: false, message: "Login failed!"});
-  }
-});
-
-
 
 app.post("/Registration", async (req, res) => {
   const { fullname, email, password, phone } = req.body;
@@ -343,6 +332,15 @@ app.post("/Registration", async (req, res) => {
 
   try {
     // ---------store data in mongodb
+
+    const user = new userSchema ({
+        fullname,
+        email,
+        password,
+        phone   
+    })
+
+
     res.status(201).send({success: true, message: "Registration successful!"});
   } catch (error) {
         res.status(500).send({success: false, message: "Registration failed!"});
@@ -350,6 +348,28 @@ app.post("/Registration", async (req, res) => {
 });
 
 
+app.post("/login", async (req, res) => {
+  const { email, password,  } = req.body;
 
+
+  try {
+    // ---------store data in mongodb
+
+const userData = await userSchema.findOne({
+    email
+})
+
+if(!userData) return res.status(404).send({success: false, message: "User not found!"});
+if(userData.password !== password) return res.status(404).send({success: false, message: "Invalid password!"});
+console.log(userData);
+
+    res.status(200).send({success: true, message: "Login successful!"});
+  } catch (error) {
+        res.status(500).send({success: false, message: "Login failed!"});
+  }
+});
+
+
+// console.log(hello());
 
 app.listen(8000, () => console.log("Server is running on port 8000"));
